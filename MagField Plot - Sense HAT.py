@@ -7,7 +7,6 @@ import csv
 import matplotlib
 matplotlib.use("Agg") #Added to plot graphs without running X server.
 import matplotlib.pyplot as plt
-#from matplotlib.ticker import FormatStrFormatter
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from sense_hat import SenseHat
@@ -43,18 +42,12 @@ def makeGraph():
     a,b,c = np.meshgrid(np.arange(-max(x),max(x), 2*max(x)/len(x)),
                         np.arange(-max(y),max(y), 2*max(y)/len(y)),
                         np.arange(-max(z),max(z), 2*max(z)/len(z)))
-    
-##    ax.xaxis.set_major_formatter(FormatStrFormatter("%.2f")) #Formats the data in the axis with 2 decimal places.
-##    ax.yaxis.set_major_formatter(FormatStrFormatter("%.2f"))
-##    ax.zaxis.set_major_formatter(FormatStrFormatter("%.2f"))
     ax.set_xlabel(u"x (\u00B0)") #x axis label.
     ax.set_ylabel(u"y (\u00B0)") #y axis label.
     ax.set_zlabel(u"z (\u00B0)") #z axis label.
 
     #Plot the vectors on the graph
     ax.quiver3D(a, b, c, x, y, z, length=0.075)
-
-    plt.show()
     plt.savefig("/home/pi/magField.png",dpi='figure', format='png') #Saves the plot with the optimal size.
     #plt.clf() #Clears the plot, in order to get a tidy plot.
     print("Graph Saved")
