@@ -1,3 +1,5 @@
+#Raspberry Pi Python 2 Program for Pressure / Temperature / Humidity Sensor that uploads directly to Google Docs Spreadsheet
+#Written by Dan Fullerton
 #!/usr/bin/python
 
 import json
