@@ -24,6 +24,7 @@ angular = 0 #Initial value of the angular displacement.
 count = 0
 snooze = .2 #Time in seconds for the time.sleep().
 velocity = 0
+continueLoop = True
 
 def saveData():
     file = open("/home/pi/orientation.csv", "a") #Opens file to save data.
@@ -58,7 +59,7 @@ def saveData():
     plt.clf() #Clears the plot, in order to get a tidy plot.
     exit
 
-while True:
+while continueLoop:
   try:
     sense = SenseHat()
     orientation = sense.get_orientation() #Reads orientation from SenseHAT.
@@ -79,8 +80,9 @@ while True:
     velocity = round(angular/snooze, 2) #Calculates the angular velocity.
     v.append(velocity)
 
-    sense.stick.direction_any = saveData #if the joystick is moved, run the saveData function
-    
+    if len(sense.stick.get_events()):
+        continueLoop = False #if the joystick is moved, run the saveData function
+        saveData()
     time.sleep(snooze) #Code is each x seconds, defined as snooze before the while loop.
  
   except KeyboardInterrupt:
